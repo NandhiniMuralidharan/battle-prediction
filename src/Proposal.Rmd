@@ -1,0 +1,108 @@
+---
+title: "To Train Them Is My Cause: Exploring Pokémon Battles"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Group Info**
+
+Jothiswaran Arumugam (JA23L)\
+Likhith Kumar Yaramala (LY23B)\
+Nandhini Muralidharan (NM23H)\
+Niveda Giridharan (NG23F)
+
+# **Narrative**
+
+### Introduction
+
+The world of Pokemon has captivated millions of fans worldwide, with its diverse array of unique creatures, each with its distinct characteristics and capabilities. Understanding the factors that contribute to a Pokemon's overall strength and performance is of great interest to both players and researchers alike.
+
+### Motivation
+
+The winning percentage of Pokemon in battle scenarios is a critical metric that reflects their overall combat prowess and viability within the game. Understanding the key factors that drive this winning percentage is of great importance to both players and game developers. For players, identifying the attributes and strategies that lead to higher winning percentages can inform team building and battle tactics, allowing them to optimize their chances of success. From the game developer's perspective, uncovering the underlying mechanics that influence winning percentage can inform balancing efforts, ensuring that the game remains engaging and competitive, while also maintaining a sense of fairness and progression. By investigating the predictors of winning percentage, this study aims to provide valuable insights that can be leveraged to enhance the player experience, foster strategic depth, and ultimately, contribute to the long-term sustainability and growth of the Pokemon gaming ecosystem. These insights can have practical applications in team building, battle strategy, and game design, benefiting both casual and competitive players alike.
+
+Aspects to investigate:
+
+1.  Relationship between individual Pokemon stats (HP, Attack, Defense, etc.) and their winning percentage.
+2.  Influence of Pokemon type (primary and secondary) on winning percentage.
+3.  Differences in winning percentage predictors between legendary and non-legendary pokemon.
+4.  Importance of type matchups and effectiveness in determining winning percentage.
+5.  Potential interaction effects between stats and type advantages/disadvantages.
+
+### Hypotheses
+
+Based on the existing literature and the characteristics of the Pokemon dataset, we propose the following hypotheses:
+
+1.  The individual stats of a Pokemon, such as HP, Attack, and Defense, will be significant predictors of its winning percentage in battles.
+
+2.  The type (primary and secondary) of a Pokemon will have a significant influence on its winning percentage, with certain type combinations exhibiting higher or lower winning percentages.
+
+3.  Legendary Pokemon will have significantly higher winning percentages compared to non-legendary Pokemon, even after accounting for other predictor variables.
+
+4.  There will be nonlinear relationships or interaction effects between the predictor variables (stats, types, etc.) that contribute to the explanation of winning percentage.
+
+5.  The importance and influence of the predictor variables on winning percentage will vary across different battle formats or gameplay scenarios (e.g., single battles, double battles, online vs. offline).
+
+By testing these hypotheses through a comprehensive regression analysis, this research will provide a deeper understanding of the key factors that best predict the winning percentage of Pokemon in battle scenarios and the complex relationships between a Pokemon's various characteristics and its overall statistical powers and will know what factors best predicts the winning percentage of a pokemon in a battle.
+
+# **Data Description**
+
+The Pokemon dataset contains comprehensive information about all Pokemon species across the seven generations, as of mid-2016. This dataset has been taken from kaggle. The author has curated this comprehensive dataset by aggregating information from these well-known Pokemon resources, including popular websites such as Pokemon.com, Pokemondb, and Bulbapedia, which are commonly used by fans and researchers to access detailed data about the Pokemon universe. The dataset contains 778 observations (rows), representing all Pokemon species (species and it's forms), and 19 variables (columns) providing detailed information about each Pokemon's stats, types, and other characteristics.
+
+In the dataset each row represents a unique Pokémon, identifiable by its `ID(#)` and `Name`, alongside type classifications, such as `Type 1` and `Type 2`, which indicate the Pokémon's elemental attributes. The dataset also includes their basic stats: `HP` (Hit Points), `Attack`, `Defense`, `Sp. Atk` (Special Attack), `Sp. Def` (Special Defense), and `Speed`, which play crucial roles in combat outcomes. Furthermore, the dataset delineates the `Generation` to which each Pokemon belongs and whether it is classified as `Legendary`, providing insight into the rarity and potential power of a Pokémon within the game's universe.
+
+Combat data is extensively detailed, presenting the number of times a Pokémon has appeared as the first or second combatant (`FirstCombat` and `SecondCombat`), as well as the total number of combats (`TotalMatch`) in which each Pokémon has participated. Wins are broken down into those achieved when the Pokémon was the first or second combatant (`FirstWin` and `SecondWin`), culminating in a `TotalWin` count for an aggregate perspective. A critical analytical measure included is the `WinningPercentage`, which reflects the success rate of each Pokemon in combat by comparing the total wins to total matches, offering a numerical effectiveness rating. This data, particularly when rounded for simplified analysis, can be invaluable for both casual enthusiasts and competitive players seeking to optimize their Pokemon selections based on historical performance data.
+
+# **Data Dictionary**
+
+1.  **`Id`** (numeric): The unique Pokedex number assigned to each Pokemon species.
+
+2.  **`Name`** (categorical): The name of the Pokemon species.
+
+3.  **`Type 1`** (categorical): The primary type of the Pokemon (e.g., Fire, Water, Grass).
+
+4.  **`Type 2`** (categorical): The secondary type of the Pokemon (pokemon which are dual type), if applicable else marked None.
+
+5.  **`HP`** (numeric): The hit points or health of the Pokemon (how much damage a pokemon can withstand before fainting).
+
+6.  **`Attack`** (numeric): The attack stat of the Pokemon is the base modifier for normal attack.
+
+7.  **`Defense`** (numeric): The defense stat of the Pokemon is the base damage resistance against normal attacks.
+
+8.  **`Sp. Atk`** (numeric): The special attack stat of the Pokemon is the base modifier for special attacks (e.g., fire blast, bubble beam).
+
+9.  **`Sp. Def`** (numeric): The special defense stat of the Pokemon is the base damage resistance against special attacks.
+
+10. **`Speed`** (numeric): The speed stat of the Pokemon determines which pokemon attacks first each round.
+
+11. **`Generation`** (numeric): The generation the Pokemon was introduced in.
+
+12. **`Legendary`** (categorical): Whether the Pokemon is legendary or not (True/False).
+
+13. **`FirstCombat`** (numeric): The number of times the Pokemon has appeared as the first combatant in a battle.
+
+14. **`SecondCombat`** (numeric): The number of times the Pokemon has appeared as the second combatant in a battle.
+
+15. **`TotalMatch`** (numeric): The total number of combats in which the Pokemon has participated.
+
+16. **`FirstWin`** (numeric): The number of matches won by the Pokemon when it was the first combatant.
+
+17. **`SecondWin`** (numeric): The number of matches won by the Pokemon when it was the second combatant.
+
+18. **`TotalWin`** (numeric): The total number of matches won by the Pokemon.
+
+19. **`WinningPercentage`** (numeric): The win rate of the Pokemon, calculated as the total wins divided by total matches, multiplied by 100 for a percentage. This is the response variable.
+
+# **Evidence of Data**
+
+Below is the evidence of the data, showcasing the first 10 rows of the pokemon dataset to provide a glimpse into the structure and contents of the information that will be used for analyzing.
+
+```{r echo=FALSE}
+pokemon_data = read.csv("Pokemon.csv", header=T)
+print(head(pokemon_data, 10))
+```
